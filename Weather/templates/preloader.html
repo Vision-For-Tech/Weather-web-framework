@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preloader</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/preloader.css') }}">
+</head>
+<style>
+    .loading {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 1.2rem;
+        font-family: cursive;
+        z-index: 10000; /* Ensure it's above the preloader */
+    }
+</style>
+<body>
+    <div class="loading">
+        <h1>Weather Data Loading..........</h1>
+    </div>
+    <div class="preloader">
+        <div class="rain"></div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        setTimeout(function() {
+            window.location.href = '/index'; // Redirect to the index page of your Flask app after 10 seconds
+        }, 2000); 
+    </script>
+</body>
+</html>

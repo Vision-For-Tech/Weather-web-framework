@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather App</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <!--====== Slick css ======-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/slick.css') }}">
+
+    <!--====== Animate css ======-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/animate.css') }}">
+    
+    <!--====== Nice Select css ======-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/nice-select.css') }}">
+    
+    <!--====== Nice Number css ======-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/jquery.nice-number.min.css') }}">
+
+    <!--====== Magnific Popup css ======-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/magnific-popup.css') }}">
+
+    <!--====== Bootstrap css ======-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstrap.min.css') }}">
+    
+    <!--====== Fontawesome css ======-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/font-awesome-min.css') }}">
+    
+    <!--====== Default css ======-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/default.css') }}">
+    
+    <!--====== Responsive css ======-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/responsive.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstrap.css') }}">
+</head>
+<body>
+    <h1>Weather for Your Location</h1>
+    <div id="weather-info">
+        <!-- Weather information will be displayed here -->
+    </div>
+
+    <!--<footer id="footer-part">
+        <div class="footer-top pt-40 pb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-about mt-40">
+                            <div class="logo">
+                                <a href="#"><img style="width: 100px; height: 100px;" src="images/smartypants.png" alt="Logo"></a>
+                            </div>
+                            <p>Gravida nibh vel velit auctor aliquetn quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate.</p>
+                            <ul class="mt-20">
+                                <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            </ul>
+                        </div> 
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="footer-link mt-40">
+                            <div class="footer-title pb-25">
+                                <h6>Sitemap</h6>
+                            </div>
+                            <ul>
+                                <li><a href="index-2.html"><i class="fa fa-angle-right"></i>Home</a></li>
+                                <li><a href="about.html"><i class="fa fa-angle-right"></i>About us</a></li>
+                                <li><a href="courses.html"><i class="fa fa-angle-right"></i>Courses</a></li>
+                            </ul>
+                            <ul>
+                                <li><a href="contact.html"><i class="fa fa-angle-right"></i>Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-sm-6">
+                        <div class="footer-link support mt-40">
+                            <div class="footer-title pb-25">
+                                <h6>Support</h6>
+                            </div>
+                            <ul>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>FAQS</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Privacy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Policy</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Support</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Documentation</a></li>
+                            </ul>
+                        </div> 
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-address mt-40">
+                            <div class="footer-title pb-25">
+                                <h6>Contact Us</h6>
+                            </div>
+                            <ul>
+                                <li>
+                                    <div class="icon">
+                                        <i><img src="images/phone.png"></i>
+                                    </div>
+                                    <div class="cont">
+                                        <p>+260 774029981</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <i class="fa fa-envelope-o"></i>
+                                    </div>
+                                    <div class="cont">
+                                        <p>visionfortech@gmail.com</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div> 
+                    </div>
+                </div> 
+            </div> 
+        </div> 
+        
+        <div class="footer-copyright pt-10 pb-25">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="copyright text-md-right text-center pt-15">
+                           
+                        </div>
+                    </div>
+                </div> 
+            </div> 
+        </div> 
+    </footer>-->
+
+    <script>
+        // Function to get the user's current location and fetch weather data
+        function fetchWeatherForUserLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+            } else {
+                console.error("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Success callback function for geolocation
+        function successCallback(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const apiKey = '3007aab689bb529fdf390186fc22e169';
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    displayWeatherInfo(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                });
+        }
+
+        // Error callback function for geolocation
+        function errorCallback(error) {
+            console.error('Error getting user location:', error);
+        }
+
+        // Function to display weather information
+        function displayWeatherInfo(data) {
+            const weatherInfo = document.getElementById('weather-info');
+            const location = data.name;
+            const temperature = data.main.temp;
+            const weatherDescription = data.weather[0].main;
+
+            weatherInfo.innerHTML = `
+                <div class="location">
+                <h2>${location}</h2>
+                </div>
+                <div class="display-container">
+                <div class="temperature">
+                <p>Temperature: ${temperature} Kelvin</p>
+                </div>
+                <div class="weather">
+                <p>Weather: ${weatherDescription}</p>
+                </div>
+                </div>
+            `;
+        }
+
+        // Call fetchWeatherForUserLocation function to get weather data for user's location
+        fetchWeatherForUserLocation();
+    </script>
+</body>
+</html>
